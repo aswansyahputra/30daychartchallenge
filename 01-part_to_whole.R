@@ -107,8 +107,8 @@ p <-
 # Save plot ---------------------------------------------------------------
 
 ggsave(
-  "01-part_to_whole.png",
-  zzz_plot,
+  "outfile/01-part_to_whole.png",
+  plot = p,
   width = 8,
   height = 8,
   dpi = 300,
