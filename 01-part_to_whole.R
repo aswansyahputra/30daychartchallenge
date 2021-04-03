@@ -3,7 +3,6 @@
 library(httr)
 library(tidyverse)
 library(ggraph)
-library(tidyverse)
 library(ggrepel)
 library(ggtext)
 
