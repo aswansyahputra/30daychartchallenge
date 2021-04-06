@@ -13,51 +13,51 @@ resp <-
     "https://data.jabarprov.go.id/api-coredata/bkd/od_jumlah_pns_daerah_otonom_berdasarkan_jenis_kelamin"
   )
 
-opd <- 
-  resp %>% 
-  content(as = "parsed", simplifyVector = TRUE) %>% 
-  pluck("data") %>% 
-  as_tibble() %>% 
+opd <-
+  resp %>%
+  content(as = "parsed", simplifyVector = TRUE) %>%
+  pluck("data") %>%
+  as_tibble() %>%
   mutate(
     across(
       where(is.character),
       ~ str_to_title(.x)
     )
-  ) %>% 
+  ) %>%
   filter(tahun == 2017)
 
 # Preprocess data for plotting --------------------------------------------
 
 to_plot <-
   opd %>%
-    rowwise() %>%
-    transmute(
-      gender = recode(
-        jenis_kelamin,
-        "Pria" = "Male", 
-        "Wanita" = "Female"
-      ),
-      gender = list(rep.int(gender, times = jumlah))
-    ) %>% 
-    ungroup() %>% 
-    unnest_longer(gender) %>%
-    drop_na() %>% 
-    mutate(
-      n = 1,
-      pack = as_tibble(pack_circles(n))
-    ) %>% 
-  unpack(pack) %>% 
-  rename(x = V1, y = V2) %>% 
+  rowwise() %>%
+  transmute(
+    gender = recode(
+      jenis_kelamin,
+      "Pria" = "Male",
+      "Wanita" = "Female"
+    ),
+    gender = list(rep.int(gender, times = jumlah))
+  ) %>%
+  ungroup() %>%
+  unnest_longer(gender) %>%
+  drop_na() %>%
+  mutate(
+    n = 1,
+    pack = as_tibble(pack_circles(n))
+  ) %>%
+  unpack(pack) %>%
+  rename(x = V1, y = V2) %>%
   filter(gender != "")
 
 # Create plot -------------------------------------------------------------
 
 p <-
-  to_plot %>% 
+  to_plot %>%
   ggplot(aes(x, y, colour = gender)) +
   geom_point(show.legend = FALSE) +
   geom_text_repel(
-    data = ~ .x %>% 
+    data = ~ .x %>%
       summarise(
         x = 0.6 * min(x),
         y = 0.7 * max(y),

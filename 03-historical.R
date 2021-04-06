@@ -13,22 +13,24 @@ onepiece_arcs <- read_csv("data/onepiece_arcs.csv")
 
 # Preprocess data for plot ------------------------------------------------
 
-onepiece_arcs_long <- 
-  onepiece_arcs %>% 
-  rowwise() %>% 
+onepiece_arcs_long <-
+  onepiece_arcs %>%
+  rowwise() %>%
   transmute(
     arc,
     saga,
     chapter = toString(seq.int(from = chapter_from, to = chapter_to, by = 1))
-  ) %>% 
-  ungroup() %>% 
+  ) %>%
+  ungroup() %>%
   separate_rows(chapter, sep = ", ", convert = TRUE)
 
-to_plot <- 
+to_plot <-
   onepiece_chapters %>%
   left_join(onepiece_arcs_long) %>%
-  group_by(year = year(release_date),
-           week = isoweek(release_date)) %>%
+  group_by(
+    year = year(release_date),
+    week = isoweek(release_date)
+  ) %>%
   summarise(
     saga = unique(saga),
     saga = fct_inorder(saga),
@@ -41,8 +43,8 @@ to_plot <-
 
 # Create plot -------------------------------------------------------------
 
-p <- 
-  to_plot %>% 
+p <-
+  to_plot %>%
   ggplot(aes(week, year)) +
   annotate(
     geom = "segment",
@@ -54,7 +56,7 @@ p <-
   ) +
   geom_point(
     aes(
-      size = as.character(n_chapters), 
+      size = as.character(n_chapters),
       fill = saga
     ),
     shape = 21,
@@ -64,7 +66,7 @@ p <-
   geom_text(
     data = ~ .x %>%
       filter(n_chapters == 2) %>%
-      slice_tail(n = 1) %>% 
+      slice_tail(n = 1) %>%
       mutate(label = "2 chapters\nin a week!"),
     aes(
       label = label
@@ -77,7 +79,7 @@ p <-
   ) +
   geom_text(
     data = ~ .x %>%
-      slice_tail(n = 1) %>% 
+      slice_tail(n = 1) %>%
       mutate(label = str_glue("Latest:\nCh. {chapters}, {avg_pages} pages\n5 April 2021")),
     aes(
       label = label
@@ -116,17 +118,21 @@ p <-
   ) +
   scale_x_continuous(
     breaks = c(1, 10, 20, 30, 40, 50),
-    labels = function(x)
+    labels = function(x) {
       if_else(x == 1, paste("Week", x, " ⟶"), paste0("w", x))
+    }
   ) +
   scale_y_continuous(
-    labels = function(x)
-      if_else(x == 2020, paste("Year", x), paste0(x)),
+    labels = function(x) {
+      if_else(x == 2020, paste("Year", x), paste0(x))
+    },
     guide = guide_axis(check.overlap = TRUE)
   ) +
   scale_size_manual(values = c("1" = 3, "2" = 6), guide = FALSE) +
-  scale_fill_pomological(name = NULL,
-                         guide = guide_legend(nrow = 3, override.aes = list(size = 4))) +
+  scale_fill_pomological(
+    name = NULL,
+    guide = guide_legend(nrow = 3, override.aes = list(size = 4))
+  ) +
   labs(
     title = "23 years, 8 months, 16 days!*",
     subtitle = "A dot marks weekly One Piece manga chapter release",
