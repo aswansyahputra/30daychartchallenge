@@ -109,7 +109,7 @@ ggsave(
   "outfile/01-part_to_whole.png",
   plot = p,
   width = 8,
-  height = 8,
+  height = 7.4,
   dpi = 300,
   type = "cairo-png"
 )

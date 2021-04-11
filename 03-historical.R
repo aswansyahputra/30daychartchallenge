@@ -162,7 +162,7 @@ ggsave(
   "outfile/03-historical.png",
   plot = p,
   width = 8,
-  height = 8,
+  height = 9.4,
   dpi = 300,
   type = "cairo-png"
 )
