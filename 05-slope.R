@@ -83,7 +83,7 @@ p <-
     colour = "gray30",
     hjust = 0.5,
     vjust = 0.5,
-    size = 3.25,
+    size = 3.5,
     lineheight = 0.75
   ) +
   annotate(
@@ -136,11 +136,12 @@ p <-
     inherit.aes = FALSE,
     label.family = "Fira Code",
     label.fontface = c("bold", "italic"),
-    label.colour = "gray30",
-    label.lineheight = 0.75,
-    label.fontsize = 7.25,
+    label.colour = c("gray15", "gray30"),
+    label.lineheight = 0.8,
+    label.fontsize = c(8.5, 7.5),
     label.fill = "#F8F8F8",
-    label.width = unit(60, "mm"),
+    label.width = unit(55, "mm"),
+    label.buffer = unit(20, "mm"),
     con.colour = "gray10"
   ) +
   scale_x_discrete(
