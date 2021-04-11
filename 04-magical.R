@@ -16,7 +16,7 @@ rid_logo_img <-
 tmp <- tempfile(fileext = ".png")
 
 rid_logo_img %>%
-  image_background(color = "#E5E5E3") %>%
+  image_background(color = "#F2F2F0") %>%
   image_write(tmp)
 
 rid_logo <-
@@ -94,8 +94,8 @@ anim <-
   ) +
   theme_void(base_family = "Public Sans") +
   theme(
-    plot.background = element_rect(fill = "#F2F2F0", colour = NA),
-    panel.background = element_rect(fill = "#F2F2F0", colour = NA),
+    plot.background = element_rect(fill = "#E5E5E3", colour = NA),
+    panel.background = element_rect(fill = "#E5E5E3", colour = NA),
     plot.title.position = "plot",
     plot.caption.position = "plot",
     plot.title = element_text(hjust = 0.5, size = rel(2.75), family = "BF Tiny Hand", colour = "gray10"),
@@ -116,7 +116,7 @@ anim_save(
   duration = 15,
   fps = 30,
   width = 8,
-  height = 9.21,
+  height = 9.4,
   units = "in",
   device = "png",
   type = "cairo-png",
