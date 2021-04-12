@@ -21,3 +21,8 @@ Compendium of my works for #30daychartchallenge. All was created using #rstats.
 ### [Day 5: Slope](05-slope.R)
 
 ![](outfile/05-slope.png)
+
+### [Day 6: Experimental](06-experimental.R)
+
+![](outfile/06-experimental.png)
+
