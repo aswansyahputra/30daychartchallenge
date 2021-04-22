@@ -26,3 +26,6 @@ Compendium of my works for #30daychartchallenge. All was created using #rstats.
 
 ![](outfile/06-experimental.png)
 
+### [Day 7: Physical](07-physical.R)
+
+![](outfile/07-physical.gif)
