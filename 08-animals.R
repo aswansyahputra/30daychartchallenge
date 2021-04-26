@@ -86,18 +86,21 @@ p <-
     hjust = 1,
     vjust = 1
   ) +
-  annotate(
-    geom = "text",
-    x = -0.85,
-    y = 100,
-    label = "then and now ",
-    angle = 90,
-    family = "Public Sans",
-    colour = "#DAFF7D",
-    alpha = 0.3,
-    size = 13,
-    hjust = 1,
-    vjust = 1
+  with_blur(
+    annotate(
+      geom = "text",
+      x = -0.85,
+      y = 100,
+      label = "don't let them fade ",
+      angle = 90,
+      family = "Public Sans",
+      colour = "#DAFF7D",
+      alpha = 0.3,
+      size = 13,
+      hjust = 1,
+      vjust = 1
+    ),
+    sigma = 5
   ) +
   annotate(
     geom = "text",
