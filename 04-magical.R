@@ -116,10 +116,10 @@ anim_save(
   duration = 15,
   fps = 30,
   width = 8,
-  height = 9.4,
+  height = 9.5,
   units = "in",
   device = "png",
   type = "cairo-png",
-  res = 90,
+  res = 150,
   renderer = gifski_renderer(loop = TRUE)
 )
